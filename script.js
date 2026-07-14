@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
         constructor() {
             this.x = Math.random() * width;
             this.y = height + Math.random() * 500;
-            this.size = Math.random() * 15 + 5;
+            this.size = Math.random() * 15 + 8; // Slightly larger for better visibility
             this.speedY = Math.random() * 1 + 0.5;
             this.speedX = (Math.random() - 0.5) * 0.5;
-            this.opacity = Math.random() * 0.5 + 0.1;
+            this.opacity = Math.random() * 0.4 + 0.3; // Higher base opacity (0.3 to 0.7)
         }
         
         update() {
@@ -43,16 +43,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
         draw() {
+            // Main bubble body
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+            ctx.fillStyle = `rgba(0, 122, 255, ${this.opacity * 0.15})`; // Slight blue tint
             ctx.fill();
+            
+            // Distinct blue border
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = `rgba(0, 122, 255, ${this.opacity * 0.6})`; 
+            ctx.stroke();
             ctx.closePath();
             
-            // Subtle highlight for bubble effect
+            // Bright highlight for bubble effect
             ctx.beginPath();
             ctx.arc(this.x - this.size * 0.3, this.y - this.size * 0.3, this.size * 0.2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity + 0.3})`;
+            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity + 0.2})`;
             ctx.fill();
             ctx.closePath();
         }
